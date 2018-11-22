@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
+// 引入被测试组件
 import Form from "../components/Form";
 
 // case1 测试组件是否正常渲染
@@ -8,10 +9,9 @@ import Form from "../components/Form";
 describe("FormView", () => {
   it("Form Component should be render", () => {
     const wrapper = shallow(<Form />);
-    //.find(selector) 是 Enzyme shallow Rendering 提供的语法, 用于查找节点
-    // 详细用法见 Enzyme 文档 http://airbnb.io/enzyme/docs/api/shallow.html
-    expect(wrapper.find("input").exists());
-    expect(wrapper.find("button").exists());
+
+    expect(wrapper.find("button").exists()).toBeTruthy();
+    expect(wrapper.find("input").exists()).toBeTruthy();
   });
 });
 
@@ -22,7 +22,7 @@ describe("executes a handler function on button", () => {
   };
 
   it("Onsubmit works", () => {
-    // 通过 mount
+    // 通过 shallow
     const wrapper = shallow(<Form onSubmit={mockEvent.onSubmit} />);
     // 通过 find 查找 button
     const button = wrapper.find("button");
